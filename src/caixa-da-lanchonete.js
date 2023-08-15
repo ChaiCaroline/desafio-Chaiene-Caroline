@@ -12,7 +12,6 @@ class CaixaDaLanchonete {
 
     pagamento(metodo){
         let pagamento = 0
-
         if (metodo.includes('dinheiro')){
             return pagamento = -0.05
         }else if (metodo.includes('credito')) {
@@ -54,7 +53,6 @@ class CaixaDaLanchonete {
         itens.forEach(element => {
             pedidoEQuantidades.push(element.split(','))
         });
-        
         for (const pedido of pedidoEQuantidades) {
             if(!this.cardapio[pedido[0]]){
                 return 1
@@ -70,31 +68,23 @@ class CaixaDaLanchonete {
     calcularValorDaCompra(metodoDePagamento, itens) {
         this.metodoDePagamento = metodoDePagamento;
         this.itens = itens;
-
         if(!this.pagamento(metodoDePagamento)){
             return ("Forma de pagamento inválida!")
         }
-
         if(!itens.length){
             return ("Não há itens no carrinho de compra!")
         }
-
         const pedidos = this.pedido(itens)
-
         if(pedidos === 1){
             return ("Item inválido!")
         }
-
         if(pedidos === 2){
             return ("Quantidade inválida!")
         }
-
         if(pedidos === 3){
             return ("Item extra não pode ser pedido sem o principal")
         }
-
         let valorTotalCompra = 0;
-
         if(itens.length > 0){
             for (const item of pedidos) {
                 if(this.cardapio[item[0]]){
@@ -108,7 +98,4 @@ class CaixaDaLanchonete {
         return "R$ " + valorTotalCompra.toFixed(2).replace('.', ',')
     }
     }
-
-
-const compra = new CaixaDaLanchonete().calcularValorDaCompra('debito', [])
 export { CaixaDaLanchonete };
